@@ -2,7 +2,7 @@ from discord.ext import commands
 from .utils.chat_formatting import *
 from .utils.dataIO import fileIO
 from .utils import checks
-from __main__ import send_cmd_help
+from __main__ import user_allowed, send_cmd_help
 import os
 
 
@@ -12,7 +12,7 @@ class Alias:
         self.aliases = fileIO("data/alias/aliases.json", "load")
 
     @commands.group(pass_context=True)
-    @checks.mod_or_permissions(manage_server=True)
+    @checks.mod_or_permissions(administrator=True)
     async def alias(self, ctx):
         """Manage per-server aliases for commands"""
         if ctx.invoked_subcommand is None:
@@ -98,6 +98,9 @@ class Alias:
                 await self.bot.say(message)
 
     async def check_aliases(self, message):
+        if not user_allowed(message):
+            return
+
         if message.author.id == self.bot.user.id or \
                 len(message.content) < 2 or message.channel.is_private:
             return
