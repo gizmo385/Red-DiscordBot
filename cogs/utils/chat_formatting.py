@@ -1,3 +1,19 @@
+def error(text):
+    return "\N{NO ENTRY SIGN} {}".format(text)
+
+
+def warning(text):
+    return "\N{WARNING SIGN} {}".format(text)
+
+
+def info(text):
+    return "\N{INFORMATION SOURCE} {}".format(text)
+
+
+def question(text):
+    return "\N{BLACK QUESTION MARK ORNAMENT} {}".format(text)
+
+
 def bold(text):
     return "**{}**".format(text)
 
