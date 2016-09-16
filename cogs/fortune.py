@@ -5,6 +5,7 @@ from .utils import checks
 from __main__ import user_allowed, send_cmd_help
 import os
 import requests
+import json
 
 class Fortune:
     def __init__(self, bot):
@@ -49,6 +50,22 @@ class Fortune:
             await self.bot.say("The argument must be a number")
         return
 
+    @commands.command(name="swapi", pass_context=True, no_pm=False)
+    @checks.mod_or_permissions(manage_server=True)
+    async def __swapi(self, ctx, endpoint, *params):
+        endpoints = ["people", "planets", "films", "starships", "vehicles",
+                     "species"]
+        if endpoint not in endpoints:
+            await self.bot.say("Valid search types: " + ", ".join(endpoints))
+            return
+
+        api_url = "https://swapi.co/api/{type}/?search={params}"
+        api_url = api_url.format(params=" ".join(params), type=endpoint)
+        try:
+            result = requests.get(api_url)
+            await self.bot.whisper(box(json.dumps(result.json(), indent=4)))
+        except:
+            await self.bot.say("Error while searching :(")
 
 def setup(bot):
     n = Fortune(bot)
