@@ -68,6 +68,6 @@ class Gizmo385:
             await self.bot.say("Error while searching :(")
 
 def setup(bot):
-    n = Fortune(bot)
+    n = Gizmo385(bot)
     bot.add_cog(n)
 
