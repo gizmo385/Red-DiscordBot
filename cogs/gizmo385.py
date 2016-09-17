@@ -7,20 +7,20 @@ import os
 import requests
 import json
 
-class Fortune:
+class Gizmo385:
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command(name="fortune", pass_context=True, no_pm=True)
-    @checks.mod_or_permissions(manage_server=True)
     async def __new_fortune(self, ctx):
+        """Gives you a fortune"""
         fortune_output = os.popen("fortune").read()
         await self.bot.say(box(fortune_output))
         return
 
     @commands.command(name="cowsay", pass_context=True, no_pm=True)
-    @checks.mod_or_permissions(manage_server=True)
     async def __cowsay(self, ctx, *text):
+        """Makes the cow say something"""
         if not text:
             await self.bot.say(box("You must include text"))
             return
@@ -30,16 +30,16 @@ class Fortune:
         return
 
     @commands.command(name="cowfortune", pass_context=True, no_pm=True)
-    @checks.mod_or_permissions(manage_server=True)
     async def __cowfortune(self, ctx):
+        """Makes the cow say a fortune"""
         fortune_output = os.popen("fortune").read()
         cosway_output = os.popen("cowsay " + fortune_output).read()
         await self.bot.say(box(cosway_output))
         return
 
     @commands.command(name="baconipsum", pass_context=True, no_pm=True)
-    @checks.mod_or_permissions(manage_server=True)
     async def __bacon_ipsum(self, ctx, paras):
+        """For when you need filler text involving bacon"""
         try:
             paras = int(paras)
             paras = max(1, min(paras, 5))
@@ -51,8 +51,8 @@ class Fortune:
         return
 
     @commands.command(name="swapi", pass_context=True, no_pm=False)
-    @checks.mod_or_permissions(manage_server=True)
     async def __swapi(self, ctx, endpoint, *params):
+        """Searches the star wars API"""
         endpoints = ["people", "planets", "films", "starships", "vehicles",
                      "species"]
         if endpoint not in endpoints:
