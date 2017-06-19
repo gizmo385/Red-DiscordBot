@@ -1,14 +1,20 @@
+import discord
 from discord.ext import commands
 from .utils.chat_formatting import *
 from .utils.dataIO import fileIO
 from .utils import checks
 from __main__ import user_allowed, send_cmd_help
+from random import choice
 import os
 import requests
+import logging
 import json
+
+log = logging.getLogger('red.gizmo385')
 
 class Gizmo385:
     def __init__(self, bot):
+        self.fuckoffs = fileIO("data/gizmo385/fuckoff.json","load")
         self.bot = bot
 
     @commands.command(name="fortune", pass_context=True, no_pm=True)
@@ -16,17 +22,6 @@ class Gizmo385:
         """Gives you a fortune"""
         fortune_output = os.popen("fortune").read()
         await self.bot.say(box(fortune_output))
-        return
-
-    @commands.command(name="cowsay", pass_context=True, no_pm=True)
-    async def __cowsay(self, ctx, *text):
-        """Makes the cow say something"""
-        if not text:
-            await self.bot.say(box("You must include text"))
-            return
-        else:
-            cosway_output = os.popen("cowsay " + " ".join(text)).read()
-            await self.bot.say(box(cosway_output))
         return
 
     @commands.command(name="cowfortune", pass_context=True, no_pm=True)
@@ -37,37 +32,48 @@ class Gizmo385:
         await self.bot.say(box(cosway_output))
         return
 
-    @commands.command(name="baconipsum", pass_context=True, no_pm=True)
-    async def __bacon_ipsum(self, ctx, paras):
-        """For when you need filler text involving bacon"""
-        try:
-            paras = int(paras)
-            paras = max(1, min(paras, 5))
-            url = "https://baconipsum.com/api/?type=meat-and-filler&paras={paras}&format=text".format(paras=paras)
-            result = requests.get(url)
-            await self.bot.say(box(result.text))
-        except ValueError:
-            await self.bot.say("The argument must be a number")
-        return
+    @commands.command(pass_context=True, no_pm=True)
+    async def fuckoff(self, ctx, user : discord.Member=None):
+        author = ctx.message.author
+        base_url = 'https://foaas.com'
+        endpoint = choice(self.fuckoffs)
 
-    @commands.command(name="swapi", pass_context=True, no_pm=False)
-    async def __swapi(self, ctx, endpoint, *params):
-        """Searches the star wars API"""
-        endpoints = ["people", "planets", "films", "starships", "vehicles",
-                     "species"]
-        if endpoint not in endpoints:
-            await self.bot.say("Valid search types: " + ", ".join(endpoints))
-            return
+        insult = requests.get(
+            base_url + endpoint, headers={'Accept' : 'text/plain'}
+        )
 
-        api_url = "https://swapi.co/api/{type}/?search={params}"
-        api_url = api_url.format(params=" ".join(params), type=endpoint)
-        try:
-            result = requests.get(api_url)
-            await self.bot.whisper(box(json.dumps(result.json(), indent=4)))
-        except:
-            await self.bot.say("Error while searching :(")
+        if insult.status_code == 200:
+            user = user.mention if user else 'everyone @here'
+
+            message = insult.content.decode('UTF-8')
+            replacements = {
+                'name' : user,
+                'from' : author.mention,
+                'language' : 'English',
+                'do' : 'Fuck',
+                'something' : 'fuckers',
+                'reference' : '¯\_(ツ)_/¯'
+            }
+
+            if ':name' not in message:
+                message = ':name, ' + message
+
+            for key, replacement in replacements.items():
+                message = message.replace(':' + key, replacement)
+
+            await self.bot.say(message)
+        else:
+            await self.bot.say("Error communicating with FOaaS API")
+
+
+def check_folders():
+    folders = ("data", "data/gizmo385/")
+    for folder in folders:
+        if not os.path.exists(folder):
+            print("Creating " + folder + " folder...")
+            os.makedirs(folder)
 
 def setup(bot):
+    check_folders()
     n = Gizmo385(bot)
     bot.add_cog(n)
-
