@@ -211,14 +211,17 @@ class Economy:
 
     @_bank.command(pass_context=True, no_pm=True)
     async def register(self, ctx):
-        """Registers an account at the Twentysix bank"""
+        """Registers an account at the Gizmo385 bank"""
         user = ctx.message.author
         try:
             account = self.bank.create_account(user)
-            await self.bot.say("{} Account opened. Current balance: {}".format(user.mention,
-                account.balance))
+            await self.bot.say(
+                "{} Account opened. Currently has {} gold stars".format(
+                    user.mention, account.balance
+                )
+            )
         except AccountAlreadyExists:
-            await self.bot.say("{} You already have an account at the Twentysix bank.".format(user.mention))
+            await self.bot.say("{} You already have an account at the Gizmo385 bank.".format(user.mention))
 
     @_bank.command(pass_context=True)
     async def balance(self, ctx, user : discord.Member=None):
@@ -228,13 +231,13 @@ class Economy:
         if not user:
             user = ctx.message.author
             try:
-                await self.bot.say("{} Your balance is: {}".format(user.mention, self.bank.get_balance(user)))
+                await self.bot.say("{}, you have {} gold stars!".format(user.mention, self.bank.get_balance(user)))
             except NoAccount:
-                await self.bot.say("{} You don't have an account at the Twentysix bank."
+                await self.bot.say("{} You don't have an account at the Gizmo385 bank."
                  " Type {}bank register to open one.".format(user.mention, ctx.prefix))
         else:
             try:
-                await self.bot.say("{}'s balance is {}".format(user.name, self.bank.get_balance(user)))
+                await self.bot.say("{} has {} gold stars.".format(user.name, self.bank.get_balance(user)))
             except NoAccount:
                 await self.bot.say("That user has no bank account.")
 
@@ -244,13 +247,13 @@ class Economy:
         author = ctx.message.author
         try:
             self.bank.transfer_credits(author, user, sum)
-            logger.info("{}({}) transferred {} credits to {}({})".format(
+            logger.info("{}({}) transferred {} gold stars to {}({})".format(
                 author.name, author.id, sum, user.name, user.id))
-            await self.bot.say("{} credits have been transferred to {}'s account.".format(sum, user.name))
+            await self.bot.say("{} gold stars have been transferred to {}'s account.".format(sum, user.name))
         except NegativeValue:
             await self.bot.say("You need to transfer at least 1 credit.")
         except SameSenderAndReceiver:
-            await self.bot.say("You can't transfer credits to yourself.")
+            await self.bot.say("You can't transfer gold stars to yourself.")
         except InsufficientBalance:
             await self.bot.say("You don't have that sum in your bank account.")
         except NoAccount:
@@ -266,7 +269,7 @@ class Economy:
         try:
             self.bank.set_credits(user, sum)
             logger.info("{}({}) set {} credits to {} ({})".format(author.name, author.id, str(sum), user.name, user.id))
-            await self.bot.say("{}'s credits have been set to {}".format(user.name, str(sum)))
+            await self.bot.say("{} no has {} gold stars".format(user.name, str(sum)))
         except NoAccount:
             await self.bot.say("User has no bank account.")
 
@@ -282,15 +285,21 @@ class Economy:
                 if seconds  >= self.settings[server.id]["PAYDAY_TIME"]:
                     self.bank.deposit_credits(author, self.settings[server.id]["PAYDAY_CREDITS"])
                     self.payday_register[server.id][id] = int(time.perf_counter())
-                    await self.bot.say("{} Here, take some credits. Enjoy! (+{} credits!)".format(author.mention, str(self.settings[server.id]["PAYDAY_CREDITS"])))
+                    await self.bot.say("{} Here, take some gold stars. Enjoy! (+{} gold stars!)".format(
+                        author.mention, str(self.settings[server.id]["PAYDAY_CREDITS"])
+                    ))
                 else:
-                    await self.bot.say("{} Too soon. For your next payday you have to wait {}.".format(author.mention, self.display_time(self.settings[server.id]["PAYDAY_TIME"] - seconds)))
+                    await self.bot.say(
+                        "{} Too soon. For your next payday you have to wait {}.".format(
+                            author.mention,
+                            self.display_time(self.settings[server.id]["PAYDAY_TIME"] - seconds)
+                        ))
             else:
                 self.payday_register[server.id][id] = int(time.perf_counter())
                 self.bank.deposit_credits(author, self.settings[server.id]["PAYDAY_CREDITS"])
-                await self.bot.say("{} Here, take some credits. Enjoy! (+{} credits!)".format(author.mention, str(self.settings[server.id]["PAYDAY_CREDITS"])))
+                await self.bot.say("{} Here, take some gold stars. Enjoy! (+{} gold stars!)".format(author.mention, str(self.settings[server.id]["PAYDAY_CREDITS"])))
         else:
-            await self.bot.say("{} You need an account to receive credits. Type {}bank register to open one.".format(author.mention, ctx.prefix))
+            await self.bot.say("{} You need an account to receive gold stars. Type {}bank register to open one.".format(author.mention, ctx.prefix))
 
     @commands.group(pass_context=True)
     async def leaderboard(self, ctx):
