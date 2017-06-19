@@ -31,13 +31,18 @@ def italics(text):
     return "*{}*".format(text)
 
 
-def pagify(text, delims=[], escape=True, shorten_by=8):
+def pagify(text, delims=["\n"], *, escape=True, shorten_by=8,
+           page_length=2000):
     """DOES NOT RESPECT MARKDOWN BOXES OR INLINE CODE"""
     in_text = text
-    while len(in_text) > 2000:
-        closest_delim = max([in_text.rfind(d, 0, 2000 - shorten_by)
+    if escape:
+        num_mentions = text.count("@here") + text.count("@everyone")
+        shorten_by += num_mentions
+    page_length -= shorten_by
+    while len(in_text) > page_length:
+        closest_delim = max([in_text.rfind(d, 0, page_length)
                              for d in delims])
-        closest_delim = closest_delim if closest_delim != -1 else 2000
+        closest_delim = closest_delim if closest_delim != -1 else page_length
         if escape:
             to_send = escape_mass_mentions(in_text[:closest_delim])
         else:
@@ -59,11 +64,17 @@ def underline(text):
     return "__{}__".format(text)
 
 
-def escape_mass_mentions(text):
-    words = {
-        "@everyone": "@\u200beveryone",
-        "@here": "@\u200bhere"
-    }
-    for k, v in words.items():
-        text = text.replace(k, v)
+def escape(text, *, mass_mentions=False, formatting=False):
+    if mass_mentions:
+        text = text.replace("@everyone", "@\u200beveryone")
+        text = text.replace("@here", "@\u200bhere")
+    if formatting:
+        text = (text.replace("`", "\\`")
+                    .replace("*", "\\*")
+                    .replace("_", "\\_")
+                    .replace("~", "\\~"))
     return text
+
+
+def escape_mass_mentions(text):
+    return escape(text, mass_mentions=True)

@@ -73,6 +73,11 @@ Who has a Safari skin?`Caitlyn
 Who says "Time for a shakedown." in game?`Caitlyn
 Who has the longest base range at level 1?`Caitlyn
 Who uses cupcakes as a weapon?`Caitlyn
+Who is also known as the Steel Shadow?`Camille
+How old is Camille?`80`Eighty
+What is Camille's last name?`Ferros
+Whose family motto is "For family, I will give."?`Camille
+Who says "Precision is the difference between a butcher and a surgeon." when picked?`Camille
 Who does Cassiopeia betray?`Sivir
 The Mythic Cassiopeia skin was released to celebrate the release of the server for which country?`Greece`Greek
 Who has a skill called "Miasma"?`Cassiopeia
@@ -144,12 +149,12 @@ Whose ult makes the corpses of small champions disappear?`Fizz
 Who was born in the Guardian's Sea?`Fizz
 Who says "I'll show them a watery grave."?`Fizz
 Whose champion design is based on an axolotl?`Fizz
-Who is also known as the "Sentinel's Sorrow"?`Galio
-Who has a skill called "Bulwark"?`Galio
+Who is also known as the "Walking National Monument"?`Galio
+Who has a skill called "Justice Punch"?`Galio
 Who created Galio?`Durand
 Whose dance is from Beauty and the Beast?`Galio
-Who has the highest attainable AP at level 1 on Summoner's Rift?`Galio
 What color is Galio in his legendary skin?`Red
+Who is the only mage Galio likes?`Lux
 Who does Captain Gangplank say "Prepare to be boarded." to?`Miss Fortune
 Whose warship did Gangplank steal?`Swain
 Who is Gangplank's ex-girlfriend?`Illaoi
@@ -191,9 +196,16 @@ Who has the highest potential tenacity in the game?`Irelia
 Who is known as the "Will of the Blades"?`Irelia
 Who says "This battle will be won."?`Irelia
 Name one of the champions that has the Mantle of Decorum?`Irelia or Karma`Irelia`Karma
+Who cannot damage any non-epic neutral monsters?`Ivern
+What is the name of Ivern's summoned sentinel?`Daisy
+Who felled the God Willow?`Ivern
+Where was Ivern originally from when he was human?`Freljord
+What does Ivern find scary?`Rift Herald
+Who was once known as "the Cruel"?`Ivern
 Who has the Victorious skin for season 2?`Janna
 Who is known as the "Storm's Fury"?`Janna
 What is Janna's last name?`Windforce
+What is the name of Janna's bird companion?`Zephyr
 Who is the only champion that can shield turrets?`Janna
 Who says "For tranquility."?`Janna
 Who is the "Exemplar of Demacia"?`Jarvan IV`j4`jarvan 4
@@ -219,6 +231,8 @@ Who has a skill called "Curtain Call"?`Jhin
 Who says "I accidentally did that on purpose."?`Jinx
 What is the name of Jinx's smaller gun?`Pow-pow`pow pow
 What is the name of Jinx's bigger gun?`Fishbones
+What is the name of Star Guardian Jinx's white gun?`Shiro
+What is the name of Star Guardian Jinx's black gun?`Kuro
 Who has a Firecracker skin?`Jinx
 Who used to have a crush on Jinx before she went crazy?`Ekko
 Who is related to the Ruined King (Blade of the Ruined King)?`Kalista
@@ -458,7 +472,7 @@ Which Demacian disapproves of Shyvana due to her lack of self-control?`Garen
 Who has a skill called "Flame Breath"?`Shyvana
 Who has a skin that was made in celebration of the 2014 World Championship?`Shyvana
 Who was the first champion ever created?`Singed
-Who was once Warwick's apprentice?`Singed
+Who did augmented Warwick?`Singed
 Who supplies Gragas with brewing equipment?`Singed
 Who invented the weapon used to destroy Master Yi's home village?`Singed
 Who has a skill called "Fling"?`Singed
@@ -504,6 +518,10 @@ Who has the most lines in the game?`Tahm Kench`tahmkench
 Who says "Savor the misery."?`Tahm Kench`tahmkench
 Who has a skill called "Devour"?`Tahm Kench`tahmkench
 Whose race is "River Demon"?`Tahm Kench`tahmkench
+What is Taliyah's favorite ice cream flavor?`Rocky Road
+How old is Taliyah?`16`sixteen
+Who nicknamed Taliyah "little sparrow"?`Yasuo
+Who gave Yasuo the thread he uses to tie up his hair?`Taliyah
 Who is Talon's rival?`Quinn
 Who is also known as the Blade's Shadow?`Talon
 Who has a skill called "Cutthroat"?`Talon
@@ -600,9 +618,9 @@ What species is Volibear?`Ursine
 Who says "Let the storm follow in my wake." when picked in champion select?`Volibear
 Who has a skill called "Majestic Roar"?`Volibear
 Who killed Urf?`Warwick
-Who is also known as "the Blood Hunter"?`Warwick
+Who is also known as "the Uncaged Wrath of Zaun"?`Warwick
 If you search for Urf in champion select, whose name pops up?`Warwick
-Who has a skill called Infinite Duress?`Warwick
+Who is also known as Subject #1088?`Warwick
 Who has a Hyena skin?`Warwick
 Warwick betrayed Soraka to get her heart for who?`Singed
 Who has the skill with the highest AD Ratio in the game?`Wukong
